@@ -1,0 +1,762 @@
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
+
+:root {
+    --bg: #f5f7fb;
+    --surface: #ffffff;
+    --surface-secondary: #f9fafb;
+    --border: #e5e7eb;
+    --text-primary: #111827;
+    --text-secondary: #6b7280;
+    --income: #16a34a;
+    --expense: #dc2626;
+    --balance: #4f46e5;
+    --accent: #111827;
+    --shadow-sm: 0 1px 2px rgba(15, 23, 42, 0.04);
+    --shadow-md: 0 8px 30px rgba(15, 23, 42, 0.06);
+    --radius-sm: 10px;
+    --radius-md: 16px;
+    --radius-lg: 22px;
+    --transition: 0.2s ease;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    min-height: 100vh;
+    background: var(--bg);
+    color: var(--text-primary);
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    -webkit-font-smoothing: antialiased;
+}
+
+body::-webkit-scrollbar {
+    width: 0;
+}
+
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+img {
+    display: block;
+    max-width: 100%;
+}
+
+button,
+input,
+select {
+    font: inherit;
+}
+
+button {
+    border: none;
+    cursor: pointer;
+}
+
+nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 76px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 32px;
+    background-color: white;
+    border-bottom: 1px solid rgba(229, 231, 235, 0.8);
+    z-index: 1000;
+}
+
+.header {
+    font-size: 1.25rem;
+    font-weight: 800;
+    letter-spacing: -0.03em;
+}
+
+.links {
+    display: flex;
+    align-items: center;
+    gap: 32px;
+    list-style: none;
+}
+
+.links li a {
+    position: relative;
+    text-decoration: none;
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+    font-weight: 600;
+    transition: var(--transition);
+}
+
+.links li a::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -10px;
+    width: 0;
+    height: 2px;
+    background: var(--text-primary);
+    transition: var(--transition);
+}
+
+.links li a:hover {
+    color: var(--text-primary);
+}
+
+.links li a:hover::after {
+    width: 100%;
+}
+
+.account {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+.account p {
+    background: linear-gradient(90deg, cyan, blue);
+    padding: 15px;
+    border-radius: 50%;
+    cursor: pointer;
+    color: white;
+    font-weight: 700;
+    text-align: center;
+}
+
+.account img {
+    width: 30px;
+    height: 30px;
+    transition: var(--transition);
+    cursor: pointer;
+}
+
+.account img:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-sm);
+}
+
+.hamburger {
+    display: none;
+}
+
+.expense-tracker {
+    padding: 108px 28px 32px;
+}
+
+.dashboard-grid {
+    display: grid;
+    grid-template-columns: 1.7fr 1fr;
+    gap: 24px;
+    align-items: start;
+}
+
+.left-column,
+.right-column {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+#summary-section {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 20px;
+}
+
+.card,
+.card2,
+.card3 {
+    position: relative;
+    overflow: hidden;
+    padding: 24px;
+    min-height: 170px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    box-shadow: var(--shadow-sm);
+    transition: var(--transition);
+}
+
+.card:hover,
+.card2:hover,
+.card3:hover {
+    box-shadow: var(--shadow-md);
+}
+
+.card::before,
+.card2::before,
+.card3::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 4px;
+}
+
+.card::before {
+    background: var(--income);
+}
+
+.card2::before {
+    background: var(--expense);
+}
+
+.card3::before {
+    background: var(--balance);
+}
+
+.card h3,
+.card2 h3,
+.card3 h3 {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: var(--text-secondary);
+    font-size: 0.92rem;
+    font-weight: 700;
+}
+
+.card h3 i,
+.card2 h3 i,
+.card3 h3 i {
+    font-size: 25px;
+}
+
+.card p,
+.card2 p,
+.card3 p {
+    margin-top: 36px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 2rem;
+    font-weight: 700;
+    letter-spacing: -0.04em;
+    color: var(--text-primary);
+}
+
+.chart-section,
+#transactionlist,
+.budget-section,
+.transaction-section {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    box-shadow: var(--shadow-sm);
+}
+
+.chart-section {
+    padding: 24px;
+    min-height: 360px;
+}
+
+#balanceChart {
+    width: 100% !important;
+    height: 100% !important;
+}
+
+#filter {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 14px;
+}
+
+#filter button {
+    color: #f3f4f6;
+    background: #374151;
+    padding: 12px 18px;
+    border-radius: 10px;
+    font-size: 0.92rem;
+    font-weight: 700;
+}
+
+.transaction-tabs button {
+    padding: 12px 18px;
+    border-radius: 10px;
+    background: #4f46e5;
+    color: white;
+    font-size: 0.92rem;
+    font-weight: 700;
+}
+
+#setBudgetBtn {
+    background: #4f46e5;
+    padding: 12px 18px;
+    border: none;
+    color: white;
+    font-size: 0.92rem;
+    font-weight: 700;
+    border-radius: 10px;
+}
+
+#incomeTransactionBtn,
+#expenseTransactionBtn {
+    width: 100%;
+    border-radius: 12px;
+    background: #4338ca;
+    color: white;
+    font-size: 0.92rem;
+    font-weight: 700;
+    transition: var(--transition);
+}
+
+#categoryFilter {
+    min-width: 200px;
+}
+
+#transactionlist {
+    padding: 24px;
+    margin-top: 24px;
+}
+
+#transactionlist h2,
+.budget-section h2,
+.transaction-section h2 {
+    font-size: 1.1rem;
+    font-weight: 800;
+    letter-spacing: -0.03em;
+}
+
+.budget-section {
+    padding: 24px;
+}
+
+.budget-controls {
+    display: flex;
+    gap: 12px;
+    margin-top: 20px;
+}
+
+.progress-bar {
+    width: 100%;
+    height: 12px;
+    margin-top: 28px;
+    overflow: hidden;
+    border-radius: 999px;
+    background: #edf2f7;
+}
+
+.progress-fill {
+    height: 100%;
+    width: 0%;
+    border-radius: inherit;
+    transition: width 0.4s ease, background-color 0.3s ease;
+}
+
+.budgetText {
+    margin-top: 18px;
+    color: var(--text-secondary);
+    font-size: 0.92rem;
+    line-height: 1.6;
+}
+
+.transaction-section {
+    padding: 24px;
+}
+
+.transaction-tabs {
+    display: flex;
+    gap: 12px;
+    margin-top: 20px;
+    margin-bottom: 28px;
+}
+
+#incomeForm,
+#expenseForm {
+    display: flex;
+    flex-direction: column;
+}
+
+#incomeForm h3,
+#expenseForm h3 {
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--text-primary);
+}
+
+input,
+select {
+    width: 100%;
+    height: 52px;
+    padding: 10px 16px;
+    border-radius: 14px;
+    border: 1px solid var(--border);
+    background: var(--surface-secondary);
+    color: var(--text-primary);
+    transition: var(--transition);
+    outline: none;
+}
+
+input::placeholder {
+    color: #9ca3af;
+}
+
+/* Transaction List Styles */
+.transaction-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    max-height: 400px;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+.transaction-card {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 0.5px solid grey;
+    margin-bottom: 20px;
+    padding: 10px;
+    width: 100%;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.transaction-name {
+    font-size: 15px;
+    font-weight: 500;
+}
+
+.transaction-date {
+    font-size: 0.75rem;
+    color: var(--text-secondary);
+}
+
+.transaction-amount {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 1rem;
+    font-weight: 700;
+    white-space: nowrap;
+}
+
+.delete-btn {
+    background: transparent;
+    border: none;
+    color: red;
+    cursor: pointer;
+    font-size: 25px;
+    transition: transform 0.2s ease;
+    padding: 5px 10px;
+}
+
+@keyframes shake {
+    0% { transform: translateX(0); }
+    25% { transform: translateX(-2px); }
+    50% { transform: translateX(2px); }
+    75% { transform: translateX(-2px); }
+    100% { transform: translateX(0); }
+}
+
+.delete-btn:hover {
+    animation: shake 0.3s ease;
+}
+
+.transaction-income {
+    color: var(--income);
+}
+
+.transaction-expense {
+    color: var(--expense);
+}
+
+#incomeTransaction,
+#expenseTransaction {
+    flex: 1;
+}
+
+#incomeTransaction.active,
+#expenseTransaction.active {
+    background: var(--balance);
+}
+
+#incomeTransactionBtn,
+#expenseTransactionBtn {
+    margin-top: 8px;
+    height: 52px;
+    border-radius: 14px;
+}
+
+#incomeForm,
+#expenseForm {
+    margin-top: 4px;
+    flex: 1;
+}
+
+#incomeForm h3,
+#expenseForm h3,
+#incomeForm input,
+#expenseForm input,
+#incomeForm select,
+#expenseForm select {
+    margin-bottom: 10px;
+}
+
+#budgetInput {
+    flex: 1;
+}
+
+canvas {
+    max-width: 100%;
+}
+
+::selection {
+    background: rgba(79, 70, 229, 0.15);
+}
+
+a,
+button,
+input,
+select {
+    -webkit-tap-highlight-color: transparent;
+}
+
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+a:focus-visible {
+    outline-offset: 2px;
+}
+
+@media (max-width: 768px) {
+
+    nav {
+        padding: 0 18px;
+    }
+
+    .links {
+        display: none;
+    }
+
+    .hamburger {
+        display: block;
+        font-size: 1.5rem;
+        font-weight: 700;
+    }
+
+    body {
+        overflow-x: hidden;
+    }
+
+    .expense-tracker {
+        padding: 100px 14px 40px;
+    }
+
+    .dashboard-grid {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .left-column,
+    .right-column {
+        display: contents;
+    }
+
+    #summary-section {
+        order: 1;
+    }
+
+    .chart-section {
+        order: 2;
+    }
+
+    .budget-section {
+        order: 3;
+    }
+
+    .transaction-section {
+        order: 4;
+    }
+
+    #filter {
+        order: 5;
+    }
+
+    #transactionlist {
+        order: 6;
+    }
+
+    #summary-section,
+    .chart-section,
+    .budget-section,
+    .transaction-section,
+    #filter,
+    #transactionlist {
+        width: 100%;
+    }
+
+    #summary-section {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 14px;
+    }
+
+    .card,
+    .card2,
+    .card3 {
+        width: 100%;
+        min-height: auto;
+        padding: 18px;
+    }
+
+    .card p,
+    .card2 p,
+    .card3 p {
+        font-size: 1.5rem;
+        margin-top: 12px;
+    }
+
+    .chart-section {
+        padding: 16px;
+        min-height: 280px;
+    }
+
+    #filter {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 5px;
+    }
+
+    #filter button {
+        width: 400px;
+    }
+
+    #categoryFilter {
+        width: 100%;
+    }
+
+    .budget-section,
+    .transaction-section,
+    #transactionlist {
+        padding: 20px;
+    }
+
+    .budget-controls {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    #budgetInput,
+    #setBudgetBtn {
+        width: 100%;
+    }
+
+    .transaction-tabs {
+        display: flex;
+        gap: 10px;
+    }
+
+    .transaction-tabs button {
+        flex: 1;
+        padding: 10px;
+        font-size: 0.85rem;
+    }
+
+    input,
+    select {
+        height: 46px;
+        font-size: 0.9rem;
+    }
+
+    #incomeTransactionBtn,
+    #expenseTransactionBtn {
+        width: 100%;
+    }
+
+    .transaction-list {
+        max-height: 450px;
+        overflow-y: auto;
+    }
+
+    .transaction-card {
+        flex-wrap: nowrap;
+        gap: 10px;
+    }
+
+    .progress-bar {
+        width: 100%;
+    }
+
+    #transactionlist {
+        overflow-x: hidden;
+    }
+}
+
+@media (max-width: 540px) {
+    nav {
+        height: 72px;
+    }
+
+    .account {
+        display: none;
+    }
+
+    .header {
+        font-size: 1rem;
+    }
+
+    .expense-tracker {
+        padding: 88px 12px 30px;
+    }
+
+    .dashboard-grid {
+        gap: 16px;
+    }
+
+    .card p,
+    .card2 p,
+    .card3 p {
+        font-size: 1.3rem;
+    }
+
+    .chart-section,
+    #transactionlist,
+    .budget-section,
+    .transaction-section {
+        padding: 16px;
+    }
+
+    .transaction-tabs {
+        flex-direction: column;
+        gap: 8px;
+    }
+
+    .transaction-tabs button {
+        width: 100%;
+    }
+
+    .transaction-list {
+        max-height: 400px;
+    }
+
+    .budget-controls {
+        gap: 8px;
+    }
+
+    input,
+    select,
+    #incomeTransactionBtn,
+    #expenseTransactionBtn,
+    #setBudgetBtn,
+    #filter button {
+        height: 44px;
+        font-size: 0.85rem;
+    }
+
+    #filter button {
+        flex: none;
+        width: calc(50% - 5px);
+    }
+}

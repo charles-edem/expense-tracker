@@ -1,0 +1,154 @@
+# index.html
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Expense Tracker</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body>
+    <nav>
+        <h1 class="header">Expense Tracker</h1>
+
+        <ul class="links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="#" target="_blank">Services</a></li>
+            <li><a href="#">Contact</a></li>
+            <li><a href="#">About</a></li>
+        </ul>
+
+        <div class="account">
+            <img src="notification.png" alt="Notification icon">
+            <p>CE</p>
+        </div>
+
+        <p class="hamburger" id="hamburger">=</p>
+    </nav>
+
+    <main class="expense-tracker">
+        <div class="dashboard-grid">
+
+            <div class="left-column">
+
+                <section id="summary-section">
+                    <div class="card summary-income">
+                        <h3>
+                            <i class="fa fa-envelope-open" aria-hidden="true"></i>
+                            Total Income
+                        </h3>
+                        <p id="totalIncome">0</p>
+                    </div>
+
+                    <div class="card2 summary-expense">
+                        <h3>
+                            <i class="fa fa-money" aria-hidden="true"></i>
+                            Total Expenses
+                        </h3>
+                        <p id="totalExpenses">0</p>
+                    </div>
+
+                    <div class="card3 summary-balance">
+                        <h3>
+                            <i class="fa fa-credit-card-alt" aria-hidden="true"></i>
+                            Balance
+                        </h3>
+                        <p id="balance">0</p>
+                    </div>
+                </section>
+
+                <section class="chart-section">
+                    <canvas id="balanceChart"></canvas>
+                </section>
+
+                <section id="filter">
+                    <button id="filterAll" type="button">All</button>
+                    <button id="filterIncome" type="button">Income</button>
+                    <button id="filterExpense" type="button">Expense</button>
+
+                    <select id="categoryFilter">
+                        <option value="allCategories">All Categories</option>
+                        <option value="food">Food</option>
+                        <option value="shopping">Shopping</option>
+                        <option value="transport">Transport</option>
+                        <option value="academics">Academics</option>
+                        <option value="bills">Bills</option>
+                    </select>
+                </section>
+
+                <section id="transactionlist">
+                    <h2>Recent Transactions</h2>
+                    <div class="transaction-list" id="transactionList">
+                </section>
+            </div>
+
+            <aside class="right-column">
+
+                <section class="budget-section" id="budgetSection">
+                    <h2>Monthly Budget</h2>
+
+                    <div class="budget-controls">
+                        <input type="number" id="budgetInput" min="0" placeholder="Enter budget">
+                        <button type="submit" id="setBudgetBtn">Set Budget</button>
+                    </div>
+
+                    <div class="progress-bar" id="progressBar">
+                        <div class="progress-fill" id="progressFill"></div>
+                    </div>
+
+                    <p id="budgetText" class="budgetText"></p>
+                </section>
+
+                <section class="transaction-section">
+                    <h2>Add Transaction</h2>
+
+                    <div class="transaction-tabs">
+                        <button type="button" id="incomeTransaction">Income</button>
+                        <button type="button" id="expenseTransaction">Expense</button>
+                    </div>
+
+                    <form id="incomeForm">
+                        <h3>Income</h3>
+
+                        <select id="incomeSource">
+                            <option value="Allowance">Allowance</option>
+                            <option value="Work">Work</option>
+                        </select>
+
+                        <input type="number" id="incomeAmount" min="0" placeholder="Amount">
+                        <input type="date" id="incomeDate">
+                        <input type="text" id="incomeNote" placeholder="Add note">
+
+                        <button type="submit" id="incomeTransactionBtn">Submit</button>
+                    </form>
+
+                    <form id="expenseForm">
+                        <h3>Expense</h3>
+
+                        <input type="text" id="expenseName" placeholder="Expense name">
+                        <input type="number" id="expenseAmount" min="0" placeholder="Amount">
+
+                        <select id="expenseCategory">
+                            <option value="food">Food</option>
+                            <option value="shopping">Shopping</option>
+                            <option value="transport">Transport</option>
+                            <option value="academics">Academics</option>
+                            <option value="bills">Bills</option>
+                        </select>
+
+                        <input type="date" id="expenseDate">
+                        <input type="text" id="expenseNote" placeholder="Add note">
+
+                        <button type="submit" id="expenseTransactionBtn">Submit</button>
+                    </form>
+                </section>
+            </aside>
+        </div>
+    </main>
+    <script type="module" src="main.js"></script>
+</body>
+</html>
