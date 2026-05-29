@@ -49,3 +49,6 @@ Built as a JavaScript practice project to improve DOM manipulation, modular codi
 
 # License
 This project is open source and free to use.
+
+# Live Demo
+https://charles-edem.github.io/expense-tracker/
