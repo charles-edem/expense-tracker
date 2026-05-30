@@ -21,8 +21,7 @@ export function getIncomeFormData() {
         type: "income",
         source: incomeSource.value,
         amount: Number(incomeAmount.value),
-        date: incomeDate.value,
-        note: incomeNote.value
+        date: new Date().toISOString().split('T')[0],
     };
 }
 
@@ -38,8 +37,7 @@ export function getExpenseFormData() {
         name: expenseName.value,
         amount: Number(expenseAmount.value),
         category: expenseCategory.value,
-        date: expenseDate.value,
-        note: expenseNote.value
+        date: new Date().toISOString().split('T')[0],
     };
 }
 
@@ -66,14 +64,12 @@ export function renderTransactions(transactions, onDelete) {
         name.classList.add("transaction-name");
         name.textContent = tx.name || tx.source || "Unknown";
 
+        const date = new Date().toISOString().split('T')[0];
+        
         const amount = document.createElement("span");
         amount.classList.add("transaction-amount");
         amount.textContent = `${isIncome ? "+" : "-"}${formatCurrency(tx.amount)}`;
         amount.style.color = isIncome ? "green" : "red";
-
-        const date = document.createElement("span");
-        date.classList.add("transaction-date");
-        date.textContent = tx.date;
 
         const delBtn = document.createElement("button");
         delBtn.classList.add("delete-btn");
@@ -87,7 +83,6 @@ export function renderTransactions(transactions, onDelete) {
 
         transactionCard.appendChild(name);
         transactionCard.appendChild(amount);
-        transactionCard.appendChild(date);
         transactionCard.appendChild(delBtn);
 
         transactionList.appendChild(transactionCard);
