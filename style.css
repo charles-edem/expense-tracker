@@ -402,7 +402,6 @@ input::placeholder {
     color: #9ca3af;
 }
 
-/* Transaction List Styles */
 .transaction-list {
     display: flex;
     flex-direction: column;
@@ -537,12 +536,6 @@ a:focus-visible {
 
     .links {
         display: none;
-    }
-
-    .hamburger {
-        display: block;
-        font-size: 1.5rem;
-        font-weight: 700;
     }
 
     body {
@@ -682,7 +675,6 @@ a:focus-visible {
 
     .transaction-card {
         flex-wrap: nowrap;
-        gap: 10px;
     }
 
     .progress-bar {
