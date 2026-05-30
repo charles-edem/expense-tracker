@@ -676,7 +676,11 @@ a:focus-visible {
     .transaction-card {
         flex-wrap: nowrap;
     }
-
+    
+    .transaction-date {
+        display: none;
+    }
+    
     .progress-bar {
         width: 100%;
     }
