@@ -148,10 +148,6 @@ nav {
     box-shadow: var(--shadow-sm);
 }
 
-.hamburger {
-    display: none;
-}
-
 .expense-tracker {
     padding: 108px 28px 32px;
 }
@@ -428,16 +424,12 @@ input::placeholder {
     font-weight: 500;
 }
 
-.transaction-date {
-    font-size: 0.75rem;
-    color: var(--text-secondary);
-}
-
 .transaction-amount {
     font-family: 'JetBrains Mono', monospace;
     font-size: 1rem;
     font-weight: 700;
     white-space: nowrap;
+    flex: 1;
 }
 
 .delete-btn {
@@ -676,11 +668,7 @@ a:focus-visible {
     .transaction-card {
         flex-wrap: nowrap;
     }
-    
-    .transaction-date {
-        display: none;
-    }
-    
+
     .progress-bar {
         width: 100%;
     }
